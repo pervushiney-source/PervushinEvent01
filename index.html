@@ -110,7 +110,7 @@
             outline-offset: 2px;
         }
         
-        .about-button {
+        .about-button, .wedding-button {
             background-color: transparent;
             color: #ffffff;
             border: 2px solid #FFD700;
@@ -119,12 +119,12 @@
             padding-right: 50px;
         }
         
-        .about-button:hover {
+        .about-button:hover, .wedding-button:hover {
             background-color: #FFD700;
             color: #000000;
         }
         
-        .about-button::after {
+        .about-button::after, .wedding-button::after {
             content: '+';
             position: absolute;
             right: 20px;
@@ -135,7 +135,7 @@
             transition: transform 0.3s ease;
         }
         
-        .about-button.active::after {
+        .about-button.active::after, .wedding-button.active::after {
             transform: translateY(-50%) rotate(45deg);
         }
         
@@ -148,10 +148,10 @@
         }
         
         .accordion-content.active {
-            max-height: 2000px; /* Увеличиваем максимальную высоту */
+            max-height: 2000px;
         }
         
-        .about-text {
+        .about-text, .wedding-text {
             padding: 25px;
             font-size: 16px;
             line-height: 1.7;
@@ -162,22 +162,28 @@
             transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s;
         }
         
-        .accordion-content.active .about-text {
+        .accordion-content.active .about-text,
+        .accordion-content.active .wedding-text {
             opacity: 1;
             transform: translateY(0);
         }
         
-        .about-text p {
+        .about-text p, .wedding-text p {
             margin-bottom: 20px;
             text-align: justify;
         }
         
-        .about-text p:last-child {
+        .about-text p:last-child, .wedding-text p:last-child {
             margin-bottom: 0;
             font-style: italic;
             color: #FFD700;
             margin-top: 25px;
             text-align: left;
+        }
+        
+        .wedding-text strong {
+            color: #FFD700;
+            font-weight: 600;
         }
         
         .footer {
@@ -248,12 +254,12 @@
                 font-size: 16px;
             }
             
-            .about-text {
+            .about-text, .wedding-text {
                 padding: 20px;
                 font-size: 15px;
             }
             
-            .about-button {
+            .about-button, .wedding-button {
                 padding-right: 45px;
             }
         }
@@ -267,26 +273,36 @@
                 font-size: 14px;
             }
             
-            .about-text {
+            .about-text, .wedding-text {
                 padding: 15px;
                 font-size: 14px;
                 line-height: 1.6;
             }
             
-            .about-button {
+            .about-button, .wedding-button {
                 padding: 15px 40px 15px 15px;
                 font-size: 16px;
             }
         }
 
         /* Дополнительные стили для лучшего отображения текста */
-        .about-text p:first-child {
+        .about-text p:first-child, .wedding-text p:first-child {
             font-weight: 500;
             color: #ffffff;
         }
 
-        .about-text p {
+        .about-text p, .wedding-text p {
             text-indent: 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #FFD700;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 30px 0 10px;
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -326,6 +342,8 @@
         
         <div class="divider-bottom"></div>
         
+        <div class="section-title">О моей работе</div>
+        
         <!-- Блок "Обо мне" с аккордеоном -->
         <div class="button-block">
             <button class="action-button about-button" id="aboutButton" aria-expanded="false" aria-controls="aboutContent">
@@ -347,6 +365,31 @@
             </div>
         </div>
         
+        <!-- Блок "Ваша свадьба" с аккордеоном -->
+        <div class="button-block">
+            <button class="action-button wedding-button" id="weddingButton" aria-expanded="false" aria-controls="weddingContent">
+                Ваша свадьба
+            </button>
+        </div>
+        
+        <div class="accordion-content" id="weddingContent" aria-hidden="true">
+            <div class="wedding-text">
+                <p><strong>Ваша свадьба! Как это будет?!</strong></p>
+                
+                <p>Я — ведущий с 2005 года, и я знаю все страхи и переживания, которые испытывают молодожены с того самого момента, как они решили: «Свадьбе быть!». И если вы уже приняли это решение — я вас поздравляю!</p>
+                
+                <p>Я советую начинать подготовку к свадьбе с поиска ведущего. Почему так? Уже после нашей первой личной или онлайн-встречи у вас появится четкое понимание, что вам нужно, а без чего можно обойтись. Я выдам вам поэтапный план подготовки, благодаря которому вы ничего не забудете и сможете все подготовить. И сама подготовка будет приносить вам ощущение приятных хлопот, а не стрессовых и нервных дней.</p>
+                
+                <p>Я переговорю с вашими родителями и с учетом ваших пожеланий скорректирую все их идеи. Я внимательно выслушаю их и дам им понимание, что их «дети» все делают правильно.</p>
+                
+                <p>Ваши гости не станут безынициативной массовкой, а будут мотивированы на праздник еще с момента подготовки. Мы создадим чат с самыми активными гостями (по вашему мнению), где они смогут познакомиться и сформировать единый план сюрпризов для вас. Это поможет нам избежать неловких и нежелательных моментов на самом мероприятии.</p>
+                
+                <p>С момента, как мы с вами заключаем договор, вы получаете не только ведущего, но и свадебного консультанта, который с вами 24/7.</p>
+                
+                <p>Если вам понравилось то, что вы прочитали, — не задумываясь, звоните! Я расскажу и покажу еще больше!</p>
+            </div>
+        </div>
+        
         <div class="footer">© 2005 Первушин Event</div>
     </div>
 
@@ -357,7 +400,8 @@
             const buttons = document.querySelectorAll('.action-button');
             const aboutButton = document.getElementById('aboutButton');
             const aboutContent = document.getElementById('aboutContent');
-            const aboutText = document.querySelector('.about-text');
+            const weddingButton = document.getElementById('weddingButton');
+            const weddingContent = document.getElementById('weddingContent');
             
             // Скрываем прелоадер после полной загрузки страницы
             window.addEventListener('load', function() {
@@ -381,25 +425,50 @@
                 buttons.forEach(button => button.classList.add('loaded'));
             }, 3000);
             
-            // Обработка аккордеона "Обо мне"
-            aboutButton.addEventListener('click', function() {
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                const isHidden = aboutContent.getAttribute('aria-hidden') === 'true';
+            // Функция для управления аккордеонами
+            function toggleAccordion(button, content) {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                const isHidden = content.getAttribute('aria-hidden') === 'true';
                 
-                // Переключаем состояние
-                this.setAttribute('aria-expanded', !isExpanded);
-                aboutContent.setAttribute('aria-hidden', !isHidden);
-                aboutContent.classList.toggle('active');
-                this.classList.toggle('active');
+                // Закрываем все другие аккордеоны
+                document.querySelectorAll('.accordion-content').forEach(acc => {
+                    if (acc !== content && acc.classList.contains('active')) {
+                        acc.classList.remove('active');
+                        acc.setAttribute('aria-hidden', 'true');
+                        const otherButton = document.querySelector(`[aria-controls="${acc.id}"]`);
+                        if (otherButton) {
+                            otherButton.setAttribute('aria-expanded', 'false');
+                            otherButton.classList.remove('active');
+                            otherButton.style.backgroundColor = 'transparent';
+                            otherButton.style.color = '#ffffff';
+                        }
+                    }
+                });
+                
+                // Переключаем текущий аккордеон
+                button.setAttribute('aria-expanded', !isExpanded);
+                content.setAttribute('aria-hidden', !isHidden);
+                content.classList.toggle('active');
+                button.classList.toggle('active');
                 
                 // Меняем стиль кнопки
                 if (!isExpanded) {
-                    this.style.backgroundColor = '#FFD700';
-                    this.style.color = '#000000';
+                    button.style.backgroundColor = '#FFD700';
+                    button.style.color = '#000000';
                 } else {
-                    this.style.backgroundColor = 'transparent';
-                    this.style.color = '#ffffff';
+                    button.style.backgroundColor = 'transparent';
+                    button.style.color = '#ffffff';
                 }
+            }
+            
+            // Обработка аккордеона "Обо мне"
+            aboutButton.addEventListener('click', function() {
+                toggleAccordion(aboutButton, aboutContent);
+            });
+            
+            // Обработка аккордеона "Ваша свадьба"
+            weddingButton.addEventListener('click', function() {
+                toggleAccordion(weddingButton, weddingContent);
             });
             
             // Обработка кликов по ссылкам для аналитики
