@@ -210,6 +210,80 @@
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
         
+        /* Стили для формы проверки даты */
+        .whatsapp-form {
+            max-width: 400px;
+            margin: 30px auto 20px;
+            padding: 25px;
+            border: 2px solid #FFD700;
+            border-radius: 0;
+            background-color: #111111;
+            color: #ffffff;
+        }
+        
+        .form-title {
+            text-align: center;
+            color: #FFD700;
+            margin-bottom: 25px;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 1px solid #333;
+            border-radius: 0;
+            font-size: 16px;
+            background-color: #000000;
+            color: #ffffff;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #FFD700;
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: #888;
+        }
+        
+        .submit-button {
+            background-color: #FFD700;
+            color: #000000;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            border: 2px solid #FFD700;
+        }
+        
+        .submit-button:hover {
+            background-color: transparent;
+            color: #FFD700;
+            transform: translateY(-2px);
+        }
+        
         /* Preloader */
         #preloader {
             position: fixed;
@@ -264,6 +338,15 @@
             .about-button, .wedding-button, .corporate-button {
                 padding-right: 45px;
             }
+            
+            .whatsapp-form {
+                padding: 20px;
+                margin: 25px auto 15px;
+            }
+            
+            .form-title {
+                font-size: 18px;
+            }
         }
         
         @media (max-width: 360px) {
@@ -284,6 +367,14 @@
             .about-button, .wedding-button, .corporate-button {
                 padding: 15px 40px 15px 15px;
                 font-size: 16px;
+            }
+            
+            .whatsapp-form {
+                padding: 15px;
+            }
+            
+            input, textarea {
+                padding: 12px;
             }
         }
 
@@ -423,6 +514,22 @@
             </div>
         </div>
         
+        <!-- Форма проверки даты -->
+        <div class="whatsapp-form">
+            <h2 class="form-title">УЗНАТЬ СВОБОДНА ЛИ ДАТА</h2>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="eventDate">Выберите дату:</label>
+                    <input type="date" id="eventDate" name="eventDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventReason">Что планируем?</label>
+                    <textarea id="eventReason" name="eventReason" rows="3" placeholder="свадьба, корпоратив, другое..." required></textarea>
+                </div>
+                <button type="submit" class="submit-button">ОТПРАВИТЬ ЗАПРОС</button>
+            </form>
+        </div>
+        
         <div class="footer">© 2005 Первушин Event</div>
     </div>
 
@@ -527,6 +634,29 @@
                         }, 100);
                     }
                 });
+            });
+            
+            // Обработка формы проверки даты
+            document.getElementById('eventForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const date = document.getElementById('eventDate').value;
+                const reason = document.getElementById('eventReason').value;
+
+                // Форматируем дату по-русски
+                const formattedDate = new Date(date).toLocaleDateString('ru-RU', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+
+                const message = `*Запрос на проверку даты*%0A%0A📅 *Дата:* ${formattedDate}%0A🎯 *Мероприятие:* ${reason}%0A%0AПодскажите, свободна ли эта дата?`;
+
+                // Номер телефона
+                const phoneNumber = '79993053019';
+
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+                window.open(whatsappUrl, '_blank');
             });
             
             // Intersection Observer для анимации при скролле
