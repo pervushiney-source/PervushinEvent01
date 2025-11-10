@@ -110,7 +110,7 @@
             outline-offset: 2px;
         }
         
-        .about-button, .wedding-button {
+        .about-button, .wedding-button, .corporate-button {
             background-color: transparent;
             color: #ffffff;
             border: 2px solid #FFD700;
@@ -119,12 +119,12 @@
             padding-right: 50px;
         }
         
-        .about-button:hover, .wedding-button:hover {
+        .about-button:hover, .wedding-button:hover, .corporate-button:hover {
             background-color: #FFD700;
             color: #000000;
         }
         
-        .about-button::after, .wedding-button::after {
+        .about-button::after, .wedding-button::after, .corporate-button::after {
             content: '+';
             position: absolute;
             right: 20px;
@@ -135,7 +135,7 @@
             transition: transform 0.3s ease;
         }
         
-        .about-button.active::after, .wedding-button.active::after {
+        .about-button.active::after, .wedding-button.active::after, .corporate-button.active::after {
             transform: translateY(-50%) rotate(45deg);
         }
         
@@ -151,7 +151,7 @@
             max-height: 2000px;
         }
         
-        .about-text, .wedding-text {
+        .about-text, .wedding-text, .corporate-text {
             padding: 25px;
             font-size: 16px;
             line-height: 1.7;
@@ -163,17 +163,18 @@
         }
         
         .accordion-content.active .about-text,
-        .accordion-content.active .wedding-text {
+        .accordion-content.active .wedding-text,
+        .accordion-content.active .corporate-text {
             opacity: 1;
             transform: translateY(0);
         }
         
-        .about-text p, .wedding-text p {
+        .about-text p, .wedding-text p, .corporate-text p {
             margin-bottom: 20px;
             text-align: justify;
         }
         
-        .about-text p:last-child, .wedding-text p:last-child {
+        .about-text p:last-child, .wedding-text p:last-child, .corporate-text p:last-child {
             margin-bottom: 0;
             font-style: italic;
             color: #FFD700;
@@ -181,7 +182,7 @@
             text-align: left;
         }
         
-        .wedding-text strong {
+        .wedding-text strong, .corporate-text strong {
             color: #FFD700;
             font-weight: 600;
         }
@@ -254,12 +255,12 @@
                 font-size: 16px;
             }
             
-            .about-text, .wedding-text {
+            .about-text, .wedding-text, .corporate-text {
                 padding: 20px;
                 font-size: 15px;
             }
             
-            .about-button, .wedding-button {
+            .about-button, .wedding-button, .corporate-button {
                 padding-right: 45px;
             }
         }
@@ -273,25 +274,25 @@
                 font-size: 14px;
             }
             
-            .about-text, .wedding-text {
+            .about-text, .wedding-text, .corporate-text {
                 padding: 15px;
                 font-size: 14px;
                 line-height: 1.6;
             }
             
-            .about-button, .wedding-button {
+            .about-button, .wedding-button, .corporate-button {
                 padding: 15px 40px 15px 15px;
                 font-size: 16px;
             }
         }
 
         /* Дополнительные стили для лучшего отображения текста */
-        .about-text p:first-child, .wedding-text p:first-child {
+        .about-text p:first-child, .wedding-text p:first-child, .corporate-text p:first-child {
             font-weight: 500;
             color: #ffffff;
         }
 
-        .about-text p, .wedding-text p {
+        .about-text p, .wedding-text p, .corporate-text p {
             text-indent: 0;
         }
         
@@ -390,6 +391,33 @@
             </div>
         </div>
         
+        <!-- Блок "Ваш корпоратив" с аккордеоном -->
+        <div class="button-block">
+            <button class="action-button corporate-button" id="corporateButton" aria-expanded="false" aria-controls="corporateContent">
+                Ваш корпоратив
+            </button>
+        </div>
+        
+        <div class="accordion-content" id="corporateContent" aria-hidden="true">
+            <div class="corporate-text">
+                <p><strong>Ваш корпоратив! Как это будет?!</strong></p>
+                
+                <p>Мой опыт — это моё главное преимущество.</p>
+                
+                <p>Я работаю ведущим с 2005 года, и корпоративы — это то, с чего начиналась моя профессиональная деятельность. Если вы планируете корпоративное мероприятие и начали с поиска ведущего, то я вас поздравляю! Это мудрое и рациональное решение!</p>
+                
+                <p>Уже после первой нашей встречи (офлайн или онлайн) вы будете четко понимать план действий и то, как распределить обязанности внутри вашего коллектива.</p>
+                
+                <p>Я познакомлюсь с вашей командой и вашей компанией, и мы вместе проговорим все цели и задачи.</p>
+                
+                <p>Это поможет нам создать дружескую атмосферу, не выходя за рамки корпоративной этики.</p>
+                
+                <p>Все конкурсы и активности будут заранее согласованы.</p>
+                
+                <p>Заключая договор со мной, вы получаете не просто ведущего, но и консультанта, который с вами 24/7.</p>
+            </div>
+        </div>
+        
         <div class="footer">© 2005 Первушин Event</div>
     </div>
 
@@ -402,6 +430,8 @@
             const aboutContent = document.getElementById('aboutContent');
             const weddingButton = document.getElementById('weddingButton');
             const weddingContent = document.getElementById('weddingContent');
+            const corporateButton = document.getElementById('corporateButton');
+            const corporateContent = document.getElementById('corporateContent');
             
             // Скрываем прелоадер после полной загрузки страницы
             window.addEventListener('load', function() {
@@ -469,6 +499,11 @@
             // Обработка аккордеона "Ваша свадьба"
             weddingButton.addEventListener('click', function() {
                 toggleAccordion(weddingButton, weddingContent);
+            });
+            
+            // Обработка аккордеона "Ваш корпоратив"
+            corporateButton.addEventListener('click', function() {
+                toggleAccordion(corporateButton, corporateContent);
             });
             
             // Обработка кликов по ссылкам для аналитики
