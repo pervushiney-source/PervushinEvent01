@@ -115,6 +115,8 @@
             color: #ffffff;
             border: 2px solid #FFD700;
             margin-top: 10px;
+            position: relative;
+            padding-right: 50px;
         }
         
         .about-button:hover {
@@ -122,16 +124,31 @@
             color: #000000;
         }
         
+        .about-button::after {
+            content: '+';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+        }
+        
+        .about-button.active::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+        
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease-out;
+            transition: max-height 0.5s ease-out;
             background-color: #111111;
             margin-top: 0;
         }
         
         .accordion-content.active {
-            max-height: 1000px;
+            max-height: 2000px; /* Увеличиваем максимальную высоту */
         }
         
         .about-text {
@@ -140,10 +157,19 @@
             line-height: 1.7;
             color: #e0e0e0;
             text-align: left;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s;
+        }
+        
+        .accordion-content.active .about-text {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .about-text p {
             margin-bottom: 20px;
+            text-align: justify;
         }
         
         .about-text p:last-child {
@@ -151,6 +177,7 @@
             font-style: italic;
             color: #FFD700;
             margin-top: 25px;
+            text-align: left;
         }
         
         .footer {
@@ -225,6 +252,10 @@
                 padding: 20px;
                 font-size: 15px;
             }
+            
+            .about-button {
+                padding-right: 45px;
+            }
         }
         
         @media (max-width: 360px) {
@@ -239,7 +270,23 @@
             .about-text {
                 padding: 15px;
                 font-size: 14px;
+                line-height: 1.6;
             }
+            
+            .about-button {
+                padding: 15px 40px 15px 15px;
+                font-size: 16px;
+            }
+        }
+
+        /* Дополнительные стили для лучшего отображения текста */
+        .about-text p:first-child {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .about-text p {
+            text-indent: 0;
         }
     </style>
 </head>
@@ -310,6 +357,7 @@
             const buttons = document.querySelectorAll('.action-button');
             const aboutButton = document.getElementById('aboutButton');
             const aboutContent = document.getElementById('aboutContent');
+            const aboutText = document.querySelector('.about-text');
             
             // Скрываем прелоадер после полной загрузки страницы
             window.addEventListener('load', function() {
@@ -342,8 +390,9 @@
                 this.setAttribute('aria-expanded', !isExpanded);
                 aboutContent.setAttribute('aria-hidden', !isHidden);
                 aboutContent.classList.toggle('active');
+                this.classList.toggle('active');
                 
-                // Меняем текст кнопки (опционально)
+                // Меняем стиль кнопки
                 if (!isExpanded) {
                     this.style.backgroundColor = '#FFD700';
                     this.style.color = '#000000';
